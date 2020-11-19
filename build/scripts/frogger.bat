@@ -82,10 +82,10 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\frogger-1.0-SNAPSHOT.jar;%APP_HOME%\lib\javafx-fxml-15.0.1-win.jar;%APP_HOME%\lib\javafx-controls-15.0.1-win.jar;%APP_HOME%\lib\javafx-controls-15.0.1.jar;%APP_HOME%\lib\javafx-media-15.0.1-win.jar;%APP_HOME%\lib\javafx-graphics-15.0.1-win.jar;%APP_HOME%\lib\javafx-graphics-15.0.1.jar;%APP_HOME%\lib\javafx-base-15.0.1-win.jar;%APP_HOME%\lib\javafx-base-15.0.1.jar
+set CLASSPATH=%APP_HOME%\lib\frogger-1.0-SNAPSHOT.jar;%APP_HOME%\lib\javafx-media-15.0.1-win.jar;%APP_HOME%\lib\javafx-fxml-15.0.1-win.jar;%APP_HOME%\lib\javafx-controls-15.0.1-win.jar;%APP_HOME%\lib\javafx-controls-15.0.1.jar;%APP_HOME%\lib\javafx-graphics-15.0.1-win.jar;%APP_HOME%\lib\javafx-graphics-15.0.1.jar;%APP_HOME%\lib\javafx-base-15.0.1-win.jar;%APP_HOME%\lib\javafx-base-15.0.1.jar
 
 @rem Execute frogger
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %FROGGER_OPTS%  -classpath "%CLASSPATH%" p4_group_8_repo.Main %CMD_LINE_ARGS%
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %FROGGER_OPTS%  -classpath "%CLASSPATH%" game.Main %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell

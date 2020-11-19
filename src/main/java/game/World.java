@@ -4,10 +4,8 @@ package game;
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -20,40 +18,29 @@ public abstract class World extends Pane {
     public World() {
 
         sceneProperty().addListener(new ChangeListener<Scene>() {
-
             @Override
             public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
                 if (newValue != null) {
-                    newValue.setOnKeyReleased(new EventHandler<KeyEvent>() {
-
-                        @Override
-                        public void handle(KeyEvent event) {
-                            if (getOnKeyReleased() != null)
-                                getOnKeyReleased().handle(event);
-                            List<Actor> myActors = getObjects(Actor.class);
-                            for (Actor anActor : myActors) {
-                                if (anActor.getOnKeyReleased() != null) {
-                                    anActor.getOnKeyReleased().handle(event);
-                                }
+                    newValue.setOnKeyReleased(e -> {
+                        if (getOnKeyReleased() != null)
+                            getOnKeyReleased().handle(e);
+                        List<Actor> myActors = getObjects(Actor.class);
+                        for (Actor anActor : myActors) {
+                            if (anActor.getOnKeyReleased() != null) {
+                                anActor.getOnKeyReleased().handle(e);
                             }
                         }
-
                     });
 
-                    newValue.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-                        @Override
-                        public void handle(KeyEvent event) {
-                            if (getOnKeyPressed() != null)
-                                getOnKeyPressed().handle(event);
-                            List<Actor> myActors = getObjects(Actor.class);
-                            for (Actor anActor : myActors) {
-                                if (anActor.getOnKeyPressed() != null) {
-                                    anActor.getOnKeyPressed().handle(event);
-                                }
+                    newValue.setOnKeyPressed(e -> {
+                        if (getOnKeyPressed() != null)
+                            getOnKeyPressed().handle(e);
+                        List<Actor> myActors = getObjects(Actor.class);
+                        for (Actor anActor : myActors) {
+                            if (anActor.getOnKeyPressed() != null) {
+                                anActor.getOnKeyPressed().handle(e);
                             }
                         }
-
                     });
                 }
 

@@ -2,15 +2,26 @@ package game;
 
 import javafx.scene.image.Image;
 
-import static game.Main.resources;
+import static game.Main.RESOURCES;
 
 public class Turtle extends Actor {
+    public static final String PLATFORM = RESOURCES + "platform/";
+    private final int speed;
     Image turtle1;
     Image turtle2;
     Image turtle3;
-    private final int speed;
     int i = 1;
     boolean bool = true;
+
+    public Turtle(int xpos, int ypos, int s, int w, int h) {
+        turtle1 = new Image(PLATFORM + "TurtleAnimation1.png", w, h, true, true);
+        turtle2 = new Image(PLATFORM + "TurtleAnimation2.png", w, h, true, true);
+        turtle3 = new Image(PLATFORM + "TurtleAnimation3.png", w, h, true, true);
+        setX(xpos);
+        setY(ypos);
+        speed = s;
+        setImage(turtle2);
+    }
 
     @Override
     public void act(long now) {
@@ -31,15 +42,5 @@ public class Turtle extends Actor {
             setX(-200);
         if (getX() < -75 && speed < 0)
             setX(600);
-    }
-
-    public Turtle(int xpos, int ypos, int s, int w, int h) {
-        turtle1 = new Image(resources + "TurtleAnimation1.png", w, h, true, true);
-        turtle2 = new Image(resources + "TurtleAnimation2.png", w, h, true, true);
-        turtle3 = new Image(resources + "TurtleAnimation3.png", w, h, true, true);
-        setX(xpos);
-        setY(ypos);
-        speed = s;
-        setImage(turtle2);
     }
 }
