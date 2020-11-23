@@ -13,7 +13,6 @@ public class myButton extends Actor {
         setY(ypos);
     }
 
-
     @Override
     public void act(long now) {
 

@@ -1,170 +1,105 @@
 package game;
 
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static game.Main.RESOURCES;
+import static game.Main.*;
 
 public class Animal extends Actor {
     private static final String ANIM = RESOURCES + "anim/";
-    private static final String FROG_ANIM = ANIM + "frog/";
+    private static final String SPRITE_PATH = ANIM + "frog/";
     private static final String DEATH_ANIM = ANIM + "death/";
 
-    Image imgW1;
-    Image imgA1;
-    Image imgS1;
-    Image imgD1;
-    Image imgW2;
-    Image imgA2;
-    Image imgS2;
-    Image imgD2;
-
-    int points = 0;
+    private static int points = 0;
     int end = 0;
-    private boolean second = false;
     boolean noMove = false;
     boolean carDeath = false;
     boolean waterDeath = false;
-    boolean stop = false;
     boolean changeScore = false;
 
     private static final double movementY = 13.3333333 * 2;
     private static final double movementX = 10.666666 * 2;
 
-    private static final int imgSize = 40;
-
-    int carD = 0;
-    double w = 800;
+    private static final double FROG_INITXPOS = 300;
+    private static final double FROG_INITYPOS = 754;
+    private static final int FROGSIZE = 40;
+    private static final int WATER = 430;
+    private static  List<Image> SpriteAnim;
+    private int SpriteFrame;
+    int DeathCounter = 0;
+    double currentY;
     ArrayList<End> inter = new ArrayList<End>();
 
 
-    public Animal(String imageLink) {
-        setImage(new Image(imageLink, imgSize, imgSize, true, true));
-        setX(300);
-        setY(679.8 + movementY);
+    public Animal() {
+        setX(FROG_INITXPOS);
+        setY(FROG_INITYPOS);
 
-        imgW1 = new Image(FROG_ANIM + "froggerUp.png", imgSize, imgSize, true, true);
-        imgA1 = new Image(FROG_ANIM + "froggerLeft.png", imgSize, imgSize, true, true);
-        imgS1 = new Image(FROG_ANIM + "froggerDown.png", imgSize, imgSize, true, true);
-        imgD1 = new Image(FROG_ANIM + "froggerRight.png", imgSize, imgSize, true, true);
-        imgW2 = new Image(FROG_ANIM + "froggerUpJump.png", imgSize, imgSize, true, true);
-        imgA2 = new Image(FROG_ANIM + "froggerLeftJump.png", imgSize, imgSize, true, true);
-        imgS2 = new Image(FROG_ANIM + "froggerDownJump.png", imgSize, imgSize, true, true);
-        imgD2 = new Image(FROG_ANIM + "froggerRightJump.png", imgSize, imgSize, true, true);
+        if (SpriteAnim == null){//Should check it just in case it has been instantiated.
+            SpriteAnim = new ArrayList<>(2); //call the class, can't call List because it is an Abstract class.
+            SpriteAnim.add(new Image(SPRITE_PATH + "frog.png", FROGSIZE, FROGSIZE, true, true));
+            SpriteAnim.add(new Image(SPRITE_PATH + "frogJump.png", FROGSIZE, FROGSIZE, true, true));
+        }
 
-        setOnKeyPressed(event -> {
-            if (noMove) {
+        setOnKeyPressed(this::handle);
+        setOnKeyReleased(this::handle);
 
-            } else if (second) {
-                switch (event.getCode()) {
-                    case W:
-                        move(0, -movementY);
-                        changeScore = false;
-                        setImage(imgW1);
-                        break;
-                    case A:
-                        move(-movementX, 0);
-                        setImage(imgA1);
-                        break;
-                    case S:
-                        move(0, movementY);
-                        setImage(imgS1);
-                        break;
-                    case D:
-                        move(movementX, 0);
-                        setImage(imgD1);
-                        break;
-                }
-                second = false;
-            } else {
-                switch (event.getCode()) {
-                    case W:
-                        move(0, -movementY);
-                        changeScore = false;
-                        setImage(imgW2);
-                        break;
-                    case A:
-                        move(-movementX, 0);
-                        setImage(imgA2);
-                        break;
-                    case S:
-                        move(0, movementY);
-                        setImage(imgS2);
-                        break;
-                    case D:
-                        move(movementX, 0);
-                        setImage(imgD2);
-                        break;
-                }
-                second = true;
-            }
-        });
-
-        setOnKeyReleased(event -> {
-            if (noMove) {
-            } else {
-                switch (event.getCode()) {
-                    case W:
-                        if (getY() < w) {
-                            changeScore = true;
-                            w = getY();
-                            points += 10;
-                        }
-                        move(0, -movementY);
-                        setImage(imgW1);
-                        break;
-                    case A:
-                        move(-movementX, 0);
-                        setImage(imgA1);
-                        break;
-                    case S:
-                        move(0, movementY);
-                        setImage(imgS1);
-                        break;
-                    case D:
-                        move(movementX, 0);
-                        setImage(imgD1);
-                        break;
-                }
-                second = false;
-            }
-
-        });
     }
-
+    private void handle(KeyEvent e) {
+        if (!noMove && Arrays.asList(KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D).contains(e.getCode())) {
+            SpriteFrame = e.getEventType() == KeyEvent.KEY_RELEASED ? 0 : (++SpriteFrame) % SpriteAnim.size();
+            setImage(SpriteAnim.get(SpriteFrame));
+            switch (e.getCode()) {
+                case W:
+                    if (getY() <= currentY) {
+                        changeScore = true;
+                        currentY = getY();
+                        points += 10;
+                    }
+                    move(0, -movementY);
+                    setRotate(0);
+                    break;
+                case A:
+                    move(-movementX, 0);
+                    setRotate(-90);
+                    break;
+                case S:
+                    move(0, movementY);
+                    setRotate(180);
+                    break;
+                case D:
+                    move(movementX, 0);
+                    setRotate(90);
+                    break;
+                default:
+            }
+        }
+    }
 
     @Override
     public void act(long now) {
-        int bounds = 0;
-        if (getY() < 0 || getY() > 734) {
-            setX(300);
-            setY(679.8 + movementY);
-        }
-        if (getX() < 0) {
-            move(movementY * 2, 0);
-        }
+        boundaries();
         if (carDeath) {
             noMove = true;
             if ((now) % 11 == 0) {
-                carD++;
+                DeathCounter++;
             }
-            if (carD == 1) {
-                setImage(new Image(DEATH_ANIM + "cardeath1.png", imgSize, imgSize, true, true));
+            if (DeathCounter == 1) {
+                setImage(new Image(DEATH_ANIM + "cardeath1.png", FROGSIZE, FROGSIZE, true, true));
             }
-            if (carD == 2) {
-                setImage(new Image(DEATH_ANIM + "cardeath2.png", imgSize, imgSize, true, true));
+            if (DeathCounter == 2) {
+                setImage(new Image(DEATH_ANIM + "cardeath2.png", FROGSIZE, FROGSIZE, true, true));
             }
-            if (carD == 3) {
-                setImage(new Image(DEATH_ANIM + "cardeath3.png", imgSize, imgSize, true, true));
+            if (DeathCounter == 3) {
+                setImage(new Image(DEATH_ANIM + "cardeath3.png", FROGSIZE, FROGSIZE, true, true));
             }
-            if (carD == 4) {
-                setX(300);
-                setY(679.8 + movementY);
-                carDeath = false;
-                carD = 0;
-                setImage(new Image(FROG_ANIM + "froggerUp.png", imgSize, imgSize, true, true));
-                noMove = false;
+            if (DeathCounter == 4) {
+                reset();
                 if (points > 50) {
                     points -= 50;
                     changeScore = true;
@@ -175,74 +110,55 @@ public class Animal extends Actor {
         if (waterDeath) {
             noMove = true;
             if ((now) % 11 == 0) {
-                carD++;
+                DeathCounter++;
             }
-            if (carD == 1) {
-                setImage(new Image(DEATH_ANIM + "waterdeath1.png", imgSize, imgSize, true, true));
+            if (DeathCounter == 1) {
+                setImage(new Image(DEATH_ANIM + "waterdeath1.png", FROGSIZE, FROGSIZE, true, true));
             }
-            if (carD == 2) {
-                setImage(new Image(DEATH_ANIM + "waterdeath2.png", imgSize, imgSize, true, true));
+            if (DeathCounter == 2) {
+                setImage(new Image(DEATH_ANIM + "waterdeath2.png", FROGSIZE, FROGSIZE, true, true));
             }
-            if (carD == 3) {
-                setImage(new Image(DEATH_ANIM + "waterdeath3.png", imgSize, imgSize, true, true));
+            if (DeathCounter == 3) {
+                setImage(new Image(DEATH_ANIM + "waterdeath3.png", FROGSIZE, FROGSIZE, true, true));
             }
-            if (carD == 4) {
-                setImage(new Image(DEATH_ANIM + "waterdeath4.png", imgSize, imgSize, true, true));
+            if (DeathCounter == 4) {
+                setImage(new Image(DEATH_ANIM + "waterdeath4.png", FROGSIZE, FROGSIZE, true, true));
             }
-            if (carD == 5) {
-                setX(300);
-                setY(679.8 + movementY);
-                waterDeath = false;
-                carD = 0;
-                setImage(new Image(FROG_ANIM + "froggerUp.png", imgSize, imgSize, true, true));
-                noMove = false;
+            if (DeathCounter == 5) {
+                reset();
                 if (points > 50) {
                     points -= 50;
                     changeScore = true;
                 }
             }
-
         }
 
-        if (getX() > 600) {
-            move(-movementY * 2, 0);
-        }
+
         if (getIntersectingObjects(Obstacle.class).size() >= 1) {
             carDeath = true;
-        }
-        if (getX() == 240 && getY() == 82) {
-            stop = true;
-        }
-        if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
-            if (getIntersectingObjects(Log.class).get(0).getLeft())
-                move(-2, 0);
-            else
-                move(.75, 0);
-        } else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-            move(-1, 0);
-        } else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-            if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
+        } else if (getIntersectingObjects(Platform.class).size() >=1 && !noMove){
+            Platform PlatformNow = getIntersectingObjects(Platform.class).get(0);
+            move(PlatformNow.getSpeed(), 0);
+            if (PlatformNow.getClass() == WetTurtle.class && ((WetTurtle) PlatformNow).isSunk()){
                 waterDeath = true;
-            } else {
-                move(-1, 0);
             }
         } else if (getIntersectingObjects(End.class).size() >= 1) {
-            inter = (ArrayList<End>) getIntersectingObjects(End.class);
-            if (getIntersectingObjects(End.class).get(0).isActivated()) {
+            End EndNow = getIntersectingObjects(End.class).get(0);
+            reset();
+            if (EndNow.isActivated()) {
                 end--;
                 points -= 50;
             }
-            points += 50;
-            changeScore = true;
-            w = 800;
-            getIntersectingObjects(End.class).get(0).setEnd();
-            end++;
-            setX(300);
-            setY(679.8 + movementY);
-        } else if (getY() < 413) {
+            else{
+                points += 50;
+                changeScore = true;
+                EndNow.setEnd();
+                end++;
+                setX(FROG_INITXPOS);
+                setY(FROG_INITYPOS);
+            }
+        } else if (getY() + FROGSIZE < WATER) {
             waterDeath = true;
-            //setX(300);
-            //setY(679.8+movementY);
         }
     }
 
@@ -260,8 +176,36 @@ public class Animal extends Actor {
             return true;
         }
         return false;
-
     }
 
+    private void boundaries(){
+        if (getY() < XYORIGIN || getY() > CANVAS_HEIGHT - FROGSIZE){
+            setY(FROG_INITYPOS);
+        }
+        if(getX() < XYORIGIN) {
+            setX(XYORIGIN);
+        }
+        else if (getX() > CANVAS_WIDTH - FROGSIZE){
+            setX(CANVAS_WIDTH- FROGSIZE);
+        }
+    }
 
+    public void reset(){
+        DeathCounter = 0;
+        SpriteFrame = 0;
+        waterDeath=false;
+        carDeath=false;
+        noMove = false;
+        setImage(SpriteAnim.get(SpriteFrame));
+        setX(FROG_INITXPOS);
+        setY(FROG_INITYPOS);
+        setRotate(0);
+    }
+
+    public void init(){
+        points = 0;
+        changeScore = true;
+        toFront();
+        reset();
+    }
 }

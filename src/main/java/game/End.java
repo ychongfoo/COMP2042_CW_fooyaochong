@@ -7,17 +7,13 @@ import static game.Main.RESOURCES;
 public class End extends Actor {
     private static final String END_PATH = RESOURCES + "end/";
     private static final int imgSize = 60;
+
     boolean activated = false;
 
-    public End(int x, int y) {
-        setX(x);
-        setY(y);
+    public End(int xpos, int ypos) {
         setImage(new Image(END_PATH + "End.png", imgSize, imgSize, true, true));
-    }
-
-    @Override
-    public void act(long now) {
-        // TODO Auto-generated method st
+        setX(xpos);
+        setY(ypos);
     }
 
     public void setEnd() {
@@ -29,5 +25,8 @@ public class End extends Actor {
         return activated;
     }
 
-
+    @Override
+    public void act(long now) {
+        // TODO Auto-generated method st
+    }
 }

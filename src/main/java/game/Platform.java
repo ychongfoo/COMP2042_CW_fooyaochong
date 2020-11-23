@@ -1,17 +1,20 @@
 package game;
 
-import javafx.scene.image.Image;
+import static game.Main.CANVAS_WIDTH;
+import static game.Main.XYORIGIN;
 
-import static game.Main.*;
-
-public abstract class Obstacle extends Actor {
+public abstract class Platform extends Actor{
     private double speed;
 
-    public Obstacle(double xpos, double ypos, double speed) {
+    public Platform(double xpos, double ypos, double speed){
         setX(xpos);
         setY(ypos);
-        this.speed = speed;
+        this.speed=speed;
         setScaleX(speed>=0 ? -1 : 1);
+    }
+
+    public double getSpeed(){
+        return speed;
     }
 
     @Override

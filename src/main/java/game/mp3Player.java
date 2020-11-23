@@ -19,7 +19,7 @@ public class mp3Player {
         String mp3File = ETC_PATH.replace("file:", "") + mp3 + ".mp3";
         Media sound = new Media(new File(mp3File).toURI().toString());
         mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setVolume(0.1);
+        mediaPlayer.setVolume(0.05);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
     }

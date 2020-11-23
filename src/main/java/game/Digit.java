@@ -7,13 +7,11 @@ import static game.Main.RESOURCES;
 public class Digit extends Actor {
     private static final String NUM_PATH = RESOURCES + "num/";
     private static final int imgSize =30;
-    Image view;
 
-    public Digit(int n, int dim, int x, int y) {
-        view = new Image(NUM_PATH + n + ".png", imgSize, imgSize, true, true);
-        setImage(view);
-        setX(x);
-        setY(y);
+    public Digit(int n, int xpos, int ypos) {
+        setImage(new Image(NUM_PATH + n + ".png", imgSize, imgSize, true, true));
+        setX(xpos);
+        setY(ypos);
     }
 
     @Override
