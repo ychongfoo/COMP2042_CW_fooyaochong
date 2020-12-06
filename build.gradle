@@ -20,4 +20,5 @@ javafx {
     modules = ['javafx.controls','javafx.fxml','javafx.media']
 }
 
+//noinspection GroovyUnusedAssignment
 mainClassName = 'game.Main'

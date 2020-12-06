@@ -2,7 +2,7 @@ package game;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class SpeedGenerator {
+public abstract class SpeedGenerator {
 
     public SpeedGenerator(){
     }
@@ -12,10 +12,9 @@ public class SpeedGenerator {
 
         switch (level){
             case 1:
-                double level1Speed = /*(double)SignedIntGenerator() **/ ThreadLocalRandom.current().nextDouble(0.4, 1 + 1);
-                return level1Speed;
+                return ThreadLocalRandom.current().nextDouble(0.4, 1 + 1);
             case 2:
-                break;
+                return ThreadLocalRandom.current().nextDouble(0.4, 2 + 1);
             default:
                 break;
         }

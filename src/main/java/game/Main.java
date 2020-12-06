@@ -1,13 +1,14 @@
 package game;
 
-import javafx.animation.AnimationTimer;
+import game.Controllers.Director;
+import game.Controllers.mp3Player;
+import game.Views.MenuScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import static game.Main.window;
-import static game.mp3Player.ETC_PATH;
+import static game.Controllers.mp3Player.ETC_PATH;
 
 /**
  *
@@ -24,21 +25,17 @@ public class Main extends Application {
     public static final double CANVAS_HEIGHT = 800;
     public static final double XYORIGIN = 0;
 
-    public static Stage window;
-    AnimationTimer timer;
-    private mp3Player mp3Player;
-    private Scene mainScene;
-    Animal frog;
+
 
 
     public static void main(String[] args) {
         launch(args);
     }
-
+    private mp3Player mp3Player;
     @Override
-    public void start(Stage window) throws Exception {
+    public void start(Stage window){
         MenuScene mainmenu= new MenuScene();
-        mainScene= new Scene(mainmenu, CANVAS_WIDTH, CANVAS_HEIGHT);
+        Scene mainScene = new Scene(mainmenu, CANVAS_WIDTH, CANVAS_HEIGHT);
 
         mp3Player = new mp3Player();
         window.setScene(mainScene);
