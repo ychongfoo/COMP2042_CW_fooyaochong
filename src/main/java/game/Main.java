@@ -1,20 +1,17 @@
 package game;
 
-import game.Controllers.Director;
-import game.Controllers.mp3Player;
-import game.Views.MenuScene;
+import game.controllers.Director;
+import game.controllers.mp3Player;
+import game.world.menu.MenuScene;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import static game.Controllers.mp3Player.ETC_PATH;
+import static game.controllers.mp3Player.ETC_PATH;
 
 /**
- *
- *
  * @author Yao Chong
- *
  */
 
 public class Main extends Application {
@@ -24,17 +21,15 @@ public class Main extends Application {
     public static final double CANVAS_WIDTH = 600;
     public static final double CANVAS_HEIGHT = 800;
     public static final double XYORIGIN = 0;
-
-
-
+    private mp3Player mp3Player;
 
     public static void main(String[] args) {
         launch(args);
     }
-    private mp3Player mp3Player;
+
     @Override
-    public void start(Stage window){
-        MenuScene mainmenu= new MenuScene();
+    public void start(Stage window) {
+        MenuScene mainmenu = new MenuScene();
         Scene mainScene = new Scene(mainmenu, CANVAS_WIDTH, CANVAS_HEIGHT);
 
         mp3Player = new mp3Player();
