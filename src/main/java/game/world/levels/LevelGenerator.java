@@ -64,7 +64,7 @@ public abstract class LevelGenerator extends World {
         if (animal.changeScore()) {
             setNumber(animal.getPoints());
         }
-        if (animal.getEndsActivated() == 1) {
+        if (animal.getEndsActivated() == 5) {
             win();
         }
     }

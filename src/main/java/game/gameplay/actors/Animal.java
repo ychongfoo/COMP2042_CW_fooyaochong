@@ -11,31 +11,97 @@ import java.util.List;
 
 import static game.Main.*;
 
+/**
+ * {@code Animal} holds a playable character that handle {@code KeyEvents} (WASD or ArrowKeys)
+ * from the user. The Animal instance interacts with other nodes that it intersects with. The Animal instance also
+ * keeps track of level progress such as CurrentScore.
+ *
+ * @see Actor
+ */
 public class Animal extends Actor {
+    /**
+     * Directory path to all frames of Frogger animations.
+     */
     private static final String ANIM = RESOURCES + "anim/";
+    /**
+     * Directory path to frames of Frogger movements.
+     */
     private static final String SPRITE_PATH = ANIM + "frog/";
+    /**
+     * Directory path to frames of Frogger's Death Animations.
+     */
     private static final String DEATH_ANIM = ANIM + "death/";
+    /**
+     * The amount in pixels of how much the Frogger jumps in the y-axis.
+     */
     private static final double movementY = 13.3333333 * 2;
+    /**
+     * The amount in pixels of how much the Frogger jumps in the x-axis.
+     */
     private static final double movementX = 10.666666 * 2;
+    /**
+     * The initial x position of the Frogger.
+     */
     private static final double FROG_INITXPOS = 300;
-    private static final double FROG_INITYPOS = 754;
+    /**
+     * The initial y position of the Frogger.
+     */
+    private static final double FROG_INITYPOS = 755;
+    /**
+     * The size of the Frogger measured in pixels.
+     */
     private static final int FROGSIZE = 40;
+    /**
+     * The position of where the Water begins.
+     */
     private static final int WATER = 430;
+    /**
+     * A List to store references to images of Frogger.
+     */
     private static List<Image> SpriteAnim;
-    int points = 0;
-    int EndsActivated = 0;
-    boolean noMove = false;
-    boolean carDeath = false;
-    boolean waterDeath = false;
-    boolean changeScore = false;
-    int DeathCounter = 0;
+    /**
+     * Initialization of {@code points} as Zero.
+     */
+    private int points = 0;
+    /**
+     * Initialization of the {@code EndsActivated} as Zero.
+     */
+    private int EndsActivated = 0;
+    /**
+     * Initialization of the {@code DeathCounter} as Zero.
+     */
+    private int DeathCounter = 0;
+    /**
+     * Stores the value of instances for the jump animation. 0 for still, 1 for jump.
+     */
     private int SpriteFrame;
+    /**
+     * Initialization of noMove as false.
+     */
+    private boolean noMove = false;
+    /**
+     * Initialization of carDeath as false.
+     */
+    private boolean carDeath = false;
+    /**
+     *  Initialization of waterDeath as false.
+     */
+    private boolean waterDeath = false;
+    /**
+     * Initialization of changeScore as false.
+     */
+    private boolean changeScore = false;
+    /**
+     * Specifies the furthest the Frogger has travelled in terms of the y-axis.
+     */
     private double currentY;
 
 
+    /**
+     * {@code Animal} is a constructor that loads all the required images of the Frogger Sprite and sets {@code onKeyPressed} and
+     * {@code onKeyReleased EventHandlers}.
+     */
     public Animal() {
-        setX(FROG_INITXPOS);
-        setY(FROG_INITYPOS);
 
         if (SpriteAnim == null) {//Should check it just in case it has been instantiated.
             SpriteAnim = new ArrayList<>(2); //call the class, can't call List because it is an Abstract class.
@@ -131,11 +197,13 @@ public class Animal extends Actor {
                 setImage(new Image(DEATH_ANIM + "waterdeath4.png", FROGSIZE, FROGSIZE, true, true));
             }
             if (DeathCounter == 5) {
+                reset();
                 if (points > 50) {
                     points -= 50;
-                    changeScore = true;
+                } else {
+                    points -= getPoints();
                 }
-                reset();
+                changeScore = true;
             }
         }
 
