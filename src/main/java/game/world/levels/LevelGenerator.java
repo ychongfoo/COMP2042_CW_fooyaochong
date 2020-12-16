@@ -1,17 +1,27 @@
 package game.world.levels;
 
 import game.controllers.Director;
-import game.gameplay.actors.*;
+import game.gameplay.actors.Animal;
+import game.gameplay.actors.Bg;
+import game.gameplay.actors.Digit;
+import game.gameplay.actors.End;
 import game.hiscore.DisplayHiScore;
 import game.world.World;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static game.controllers.mp3Player.ETC_PATH;
+
+/**
+ * {@code LevelGenerator}
+ */
 public abstract class LevelGenerator extends World {
     protected static final int LOG_PADDING = 9;
     protected static final int CAR_PADDING = 10;
@@ -62,6 +72,8 @@ public abstract class LevelGenerator extends World {
     public void win() {
         stop();
         TextInputDialog textInputDialog = new TextInputDialog();
+        Stage stage = (Stage) textInputDialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(ETC_PATH + "icon-frogger-pixel-512x512.png"));
         textInputDialog.setTitle("NEW HIGHSCORE!");
         textInputDialog.setHeaderText("Your score: " + animal.getPoints());
         textInputDialog.setContentText("Name: ");
@@ -77,8 +89,8 @@ public abstract class LevelGenerator extends World {
             int d = n / 10;
             int k = n - d * 10;
             n = d;
-            num.add(new Digit(k, 540 - shift, 25));
-            shift += 30;
+            num.add(new Digit(k, 16, 564 - shift, 42));
+            shift += 20;
         } while (n > 0);
         num.forEach(this::add);
     }

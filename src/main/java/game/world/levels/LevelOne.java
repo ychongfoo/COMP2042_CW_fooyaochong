@@ -18,14 +18,7 @@ public class LevelOne extends LevelGenerator {
         double Truck1_Speed = SpeedGenerator.getSpeed(level);
         double Truck2_Speed = SpeedGenerator.getSpeed(level);
 
-/*        nextLevel= new myButton("arrow", 41, 550,10);
-        nextLevel.setOnMouseClicked(event ->{
-//            Director.level2();
-        });
-
-        add(nextLevel);*/
-
-
+        add(new Digit(level, 25, 210, 29));
         add(new Log("short", 0, ROW1 + LOG_PADDING, Log1_Speed));
         add(new Log("short", 250, ROW1 + LOG_PADDING, Log1_Speed));
         add(new Log("short", 440, ROW1 + LOG_PADDING, Log1_Speed));

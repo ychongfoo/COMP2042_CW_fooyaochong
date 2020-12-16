@@ -4,9 +4,12 @@ import game.Main;
 import game.gameplay.Actor;
 import javafx.scene.image.Image;
 
+/**
+ * {@code End} contains all the fr
+ */
 public class End extends Actor {
     private static final String END_PATH = Main.RESOURCES + "end/";
-    private static final int imgSize = 60;
+    private static final int imgSize = 70;
 
     boolean activated;
 

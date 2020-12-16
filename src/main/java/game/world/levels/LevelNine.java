@@ -18,14 +18,7 @@ public class LevelNine extends LevelGenerator {
         double Truck1_Speed = SpeedGenerator.getSpeed(level);
         double Truck2_Speed = SpeedGenerator.getSpeed(level);
 
-/*        nextLevel= new myButton("arrow", 41, 550,10);
-        nextLevel.setOnMouseClicked(event ->{
-//            Director.level2();
-        });
-
-        add(nextLevel);*/
-
-
+        add(new Digit(level, 25, 210, 29));
         add(new Log("short", 0, ROW1 + LOG_PADDING, Log1_Speed));
         add(new Log("short", 250, ROW1 + LOG_PADDING, Log1_Speed));
         add(new Log("short", 440, ROW1 + LOG_PADDING, Log1_Speed));
@@ -45,6 +38,23 @@ public class LevelNine extends LevelGenerator {
         add(new Turtle(322, ROW5, Turtle_Speed));
         add(new Turtle(505, ROW5, Turtle_Speed));
 
+        add(new Car(0, ROW6 + CAR_PADDING, Car1_Speed));
+        add(new Car(150, ROW6 + CAR_PADDING, Car1_Speed));
+        add(new Car(400, ROW6 + CAR_PADDING, Car1_Speed));
+
+        add(new Car(75, ROW7 + CAR_PADDING, Car2_Speed));
+        add(new Car(231, ROW7 + CAR_PADDING, Car2_Speed));
+        add(new Car(400, ROW7 + CAR_PADDING, Car2_Speed));
+
+        add(new Truck("short", 50, ROW8 + CAR_PADDING, Truck1_Speed));
+        add(new Truck("short", 300, ROW8 + CAR_PADDING, Truck1_Speed));
+
+        add(new Car(0, ROW9 + CAR_PADDING, Car3_Speed));
+        add(new Car(150, ROW9 + CAR_PADDING, Car3_Speed));
+        add(new Car(400, ROW9 + CAR_PADDING, Car3_Speed));
+
+        add(new Truck("long", 500, ROW10 + CAR_PADDING, Truck2_Speed));
+        add(new Truck("long", 230, ROW10 + CAR_PADDING, Truck2_Speed));
 
     }
 }

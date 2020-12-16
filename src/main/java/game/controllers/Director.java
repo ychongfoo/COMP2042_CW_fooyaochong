@@ -2,13 +2,18 @@ package game.controllers;
 
 import game.Main;
 import game.world.World;
-import game.world.menu.MenuScene;
 import game.world.levels.*;
+import game.world.menu.InfoScene;
+import game.world.menu.MenuScene;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * The {@code Director} class directs which scene should come next and also points to the necessary scenes.
+ */
 public abstract class Director {
     private static final Scene mainMenu = new Scene(new MenuScene(), Main.CANVAS_WIDTH, Main.CANVAS_HEIGHT);
+    private static final Scene infoScene = new Scene(new InfoScene(), Main.CANVAS_WIDTH, Main.CANVAS_HEIGHT);
     private static Stage Window;
     private static Scene levelOne;
     private static Scene levelTwo;
@@ -34,9 +39,13 @@ public abstract class Director {
     }
 
     public static void MainMenu() {
-        stopScene(levelOne);
         startScene(mainMenu);
     }
+
+    public static void infoScene() {
+        startScene(infoScene);
+    }
+
 
     public static void nextLevel() {
         CurrentLevel currentLevel = new CurrentLevel();

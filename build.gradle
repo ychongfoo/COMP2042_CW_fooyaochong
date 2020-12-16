@@ -12,13 +12,25 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.3'
+}
+
+test {
+    useJUnitPlatform()
 }
 
 javafx {
     version = "15.0.1"
-    modules = ['javafx.controls','javafx.fxml','javafx.media']
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
 }
-
+javadoc {
+    source = sourceSets.main.allJava
+    classpath = sourceSets.main.runtimeClasspath
+    options.memberLevel = JavadocMemberLevel.PRIVATE
+    options {
+        links 'https://docs.oracle.com/en/java/javase/15/docs/api/'
+        links 'https://docs.oracle.com/javase/8/javafx/api/'
+    }
+}
 //noinspection GroovyUnusedAssignment
 mainClassName = 'game.Main'

@@ -29,7 +29,6 @@ public class Animal extends Actor {
     boolean waterDeath = false;
     boolean changeScore = false;
     int DeathCounter = 0;
-    ArrayList<End> inter = new ArrayList<>();
     private int SpriteFrame;
     private double currentY;
 
@@ -150,7 +149,6 @@ public class Animal extends Actor {
                 waterDeath = true;
             }
         } else if (getIntersectingObjects(End.class).size() >= 1) {
-            inter = (ArrayList<End>) getIntersectingObjects(End.class);
             if (getIntersectingObjects(End.class).get(0).isActivated()) {
                 EndsActivated--;
                 points -= 50;

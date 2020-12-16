@@ -7,9 +7,8 @@ import static game.Main.RESOURCES;
 
 public class Digit extends Actor {
     private static final String NUM_PATH = RESOURCES + "num/";
-    private static final int imgSize = 30;
 
-    public Digit(int n, int xpos, int ypos) {
+    public Digit(int n,int imgSize, int xpos, int ypos) {
         setImage(new Image(NUM_PATH + n + ".png", imgSize, imgSize, true, true));
         setX(xpos);
         setY(ypos);
@@ -17,8 +16,6 @@ public class Digit extends Actor {
 
     @Override
     public void act(long now) {
-        // TODO Auto-generated method stub
-
     }
 
 }
