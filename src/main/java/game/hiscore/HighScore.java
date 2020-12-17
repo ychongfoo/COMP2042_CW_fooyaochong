@@ -1,5 +1,8 @@
 package game.hiscore;
 
+/**
+ *
+ */
 @SuppressWarnings("rawtypes")
 public class HighScore implements Comparable {
 

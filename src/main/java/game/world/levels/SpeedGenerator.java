@@ -6,10 +6,6 @@ import java.util.concurrent.ThreadLocalRandom;
  * {@code SpeedGenerator} is an abstract class that generates the speed responsible for each level.
  */
 public abstract class SpeedGenerator {
-
-    public SpeedGenerator() {
-    }
-
     /**
      * @param level that takes in integer Level as parameter.
      * @return the randomly generated speed in the specified range for each levels.
@@ -30,5 +26,4 @@ public abstract class SpeedGenerator {
             default -> 0;
         };
     }
-
 }

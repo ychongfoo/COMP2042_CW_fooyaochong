@@ -18,7 +18,7 @@ import static game.Main.*;
  *
  * @see Actor
  */
-public class Animal extends Actor {
+public class Animal extends Actor{
     /**
      * Directory path to all frames of Frogger animations.
      */
@@ -102,7 +102,6 @@ public class Animal extends Actor {
      * {@code onKeyReleased EventHandlers}.
      */
     public Animal() {
-
         if (SpriteAnim == null) {//Should check it just in case it has been instantiated.
             SpriteAnim = new ArrayList<>(2); //call the class, can't call List because it is an Abstract class.
             SpriteAnim.add(new Image(SPRITE_PATH + "frog.png", FROGSIZE, FROGSIZE, true, true));
@@ -114,6 +113,12 @@ public class Animal extends Actor {
 
     }
 
+    /**
+     * Moves the Frogger when the specific keys are pressed and plays the jump animation.
+     * {@code EventHandlers} are called for {@code KeyPressed} and {@code KeyReleased} events.
+     *
+     * @param e KeyEvent that is fired.
+     */
     private void handle(KeyEvent e) {
         if (!noMove) {
             SpriteFrame = e.getEventType() == KeyEvent.KEY_RELEASED ? 0 : (++SpriteFrame) % SpriteAnim.size();
@@ -152,6 +157,12 @@ public class Animal extends Actor {
         }
     }
 
+    /**
+     * Calls {@link #boundaries()} method and plays the death Animations when necessary.
+     * It is being called every frame.
+     *
+     * @param now Time measured in nanoseconds.
+     */
     @Override
     public void act(long now) {
         boundaries();
@@ -233,18 +244,30 @@ public class Animal extends Actor {
         }
     }
 
+    /**
+     * Resets the number of ends activated to zero so the game can be restarted.
+     */
     public void resetEndsActivated() {
         this.EndsActivated = 0;
     }
 
+    /**
+     * @return the number of ends activated at the moment.
+     */
     public int getEndsActivated() {
         return EndsActivated;
     }
 
+    /**
+     * @return the points at the moment.
+     */
     public int getPoints() {
         return points;
     }
 
+    /**
+     * @return true if score is changed and false if score is not changed.
+     */
     public boolean changeScore() {
         if (changeScore) {
             changeScore = false;
@@ -253,6 +276,9 @@ public class Animal extends Actor {
         return false;
     }
 
+    /**
+     * This method ensures that the Frogger stays within the boundaries of the {@code Stage}.
+     */
     private void boundaries() {
         if (getY() < XYORIGIN || getY() > CANVAS_HEIGHT - FROGSIZE) {
             setY(FROG_INITYPOS);
@@ -264,6 +290,10 @@ public class Animal extends Actor {
         }
     }
 
+    /**
+     * Resets everything,
+     * returns the Frogger to its starting position and sets all death animations to false.
+     */
     public void reset() {
         DeathCounter = 0;
         SpriteFrame = 0;
@@ -276,6 +306,9 @@ public class Animal extends Actor {
         setRotate(0);
     }
 
+    /**
+     * Initializes the points to zero, set CurrentY to {@code CANVAS_HEIGHT} and calls {@code reset()} method.
+     */
     public void init() {
         currentY = CANVAS_HEIGHT;
         points = 0;

@@ -15,11 +15,17 @@ public class CurrentLevel {
     public CurrentLevel() {
     }
 
-    public int getLevel() {
-        return level;
-    }
-
+    /**
+     * @param level set the specified level as the current Level
+     */
     public void setLevel(int level) {
         CurrentLevel.level = level;
+    }
+
+    /**
+     * @return the current Level
+     */
+    public int getLevel() {
+        return level;
     }
 }

@@ -1,3 +1,11 @@
 /.idea/
-/build/
+/build/classes/
+/build/distributions/
+/build/generated/
+/build/libs/
+/build/reports/
+/build/resources/
+/build/scripts/
+/build/test-result/
+/build/tmp/
 /.gradle/

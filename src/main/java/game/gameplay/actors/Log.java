@@ -6,14 +6,13 @@ import javafx.scene.image.Image;
 import static game.Main.RESOURCES;
 
 /**
- *{@code Log} provides a Log image platform of different types/sizes in the game.
+ *{@code Log} provides a Log image platform of different types/sizes for the Frogger to jump on in the game.
  *
- * @see game.gameplay.Actor
  * @see Platform
  */
 public class Log extends Platform {
     /**
-     * Directory Path to the png files of logs.
+     * Path directory to the png files of logs.
      */
     private static final String LOG_PATH = RESOURCES + "platform/log_";
     /**
@@ -30,12 +29,12 @@ public class Log extends Platform {
     private static final double LOG_LONG = 320.4;
 
     /**
-     * Log constructor to initialize the speed, position and type of log.
+     * Creates a Log at the specified coordinate with the specified speed and displays the corresponding image.
      *
-     * @param type set Type of Logs: {@code short, medium, long}
-     * @param xpos set x position of the Log
-     * @param ypos set y position of the log
-     * @param speed set the speed of the log
+     * @param type the Type of Logs: {@code short, medium, long}.
+     * @param xpos the x position of the Log.
+     * @param ypos the y position of the log.
+     * @param speed the speed of the log.
      */
     public Log(String type, int xpos, int ypos, double speed) {
         super(xpos, ypos, speed);

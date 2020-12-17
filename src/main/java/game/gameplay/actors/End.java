@@ -2,6 +2,7 @@ package game.gameplay.actors;
 
 import game.Main;
 import game.gameplay.Actor;
+import game.world.World;
 import javafx.scene.image.Image;
 
 /**
@@ -48,7 +49,6 @@ public class End extends Actor {
     /**
      * Empty act method. Used to start animationTimer.
      *
-     * @see game.world.World
      * @param now Time measured in nanoseconds.
      */
     @Override

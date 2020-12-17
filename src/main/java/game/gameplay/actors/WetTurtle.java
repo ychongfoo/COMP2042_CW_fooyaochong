@@ -6,15 +6,39 @@ import javafx.scene.image.Image;
 import static game.gameplay.actors.Turtle.PLATFORM;
 import static game.gameplay.actors.Turtle.TURTLE_SIZE;
 
+/**
+ * {@code WetTurtle} provides a WetTurtle image platform that swims and sinks for the Frogger to jump on when its floating in the game.
+ */
 public class WetTurtle extends Platform {
-
+    /**
+     * An instance to store the image of the turtle frame.
+     */
     private static Image turtle1;
+    /**
+     * An instance to store the image of the turtle frame.
+     */
     private static Image turtle2;
+    /**
+     * An instance to store the image of the turtle frame.
+     */
     private static Image turtle3;
+    /**
+     * An instance to store the image of the turtle frame.
+     */
     private static Image turtle4;
 
-    boolean sunk = false;
+    /**
+     * Initialization of sunk to be false.
+     */
+    private boolean sunk = false;
 
+    /**
+     * Creates a {@code WetTurtle} that sinks and rises at the specified coordinate and the specified speed.
+     *
+     * @param xpos the x-position of the WetTurtle
+     * @param ypos the y-position of the WetTurtle
+     * @param speed the speed of the WetTurtle
+     */
     public WetTurtle(int xpos, int ypos, double speed) {
         super(xpos, ypos, speed);
         turtle1 = new Image(PLATFORM + "TurtleAnimation1.png", TURTLE_SIZE, TURTLE_SIZE, true, true);
@@ -24,6 +48,12 @@ public class WetTurtle extends Platform {
         setImage(turtle2);
     }
 
+    /**
+     * Plays the animation of the WetTurtle instances by setting the display image.
+     * Called every frame.
+     *
+     * @param now Time measured in nanoseconds.
+     */
     @Override
     public void act(long now) {
         super.act(now);
@@ -42,6 +72,9 @@ public class WetTurtle extends Platform {
         }
     }
 
+    /**
+     * @return true if the Turtle is sunk and false when its not.
+     */
     public boolean isSunk() {
         return sunk;
     }

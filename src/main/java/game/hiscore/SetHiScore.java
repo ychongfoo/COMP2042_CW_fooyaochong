@@ -7,8 +7,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ *
+ */
 public class SetHiScore {
+    /**
+     * Directory path to all the highscore CSV's
+     */
     private static final String CSV_PATH = Main.RESOURCES.replace("file:", "") + "highscores/highscores";
+    /**
+     * An ArrayList that stores all the HighScores into an ArrayList.
+     */
     public final ArrayList<HighScore> hList = new ArrayList<>();
     /**
      * winner holds Highscore object

@@ -90,7 +90,7 @@ public abstract class World extends Pane {
     }
 
     /**
-     * <p1>Adds an Actor instance as a child node to the Scene.</p1>
+     * Adds an Actor instance as a child node to the Scene.
      *
      * @see Actor
      * @param actor An Actor instance such as {@code Log, Car, Truck, Turtle, etc.} to be displayed.
@@ -100,7 +100,7 @@ public abstract class World extends Pane {
     }
 
     /**
-     * <p1>Removes an Actor instance from the Scene.</p1>
+     * Removes an Actor instance from the Scene.
      *
      * @see Actor
      * @param actor An Actor instance such as {@code Log, Car, Truck, Turtle, etc.} to be displayed.
