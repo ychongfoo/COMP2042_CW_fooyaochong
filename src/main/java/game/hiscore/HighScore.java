@@ -1,7 +1,7 @@
 package game.hiscore;
 
 /**
- *
+ * Provides the name and score of the Player who won and sorts it so that the Highest Score would appear at the top.
  */
 @SuppressWarnings("rawtypes")
 public class HighScore implements Comparable {

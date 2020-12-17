@@ -1,7 +1,9 @@
 package game.world.levels;
 
 import game.gameplay.actors.*;
-
+/**
+ * Ninth Level of the game
+ */
 public class LevelNine extends LevelGenerator {
 
     public LevelNine(int level) {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- *
+ * Read and Writes scores from and into CSV files.
  */
 public class SetHiScore {
     /**
