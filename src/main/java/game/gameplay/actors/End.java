@@ -2,7 +2,6 @@ package game.gameplay.actors;
 
 import game.Main;
 import game.gameplay.Actor;
-import game.world.World;
 import javafx.scene.image.Image;
 
 /**

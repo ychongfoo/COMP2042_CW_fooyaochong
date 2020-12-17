@@ -1,7 +1,6 @@
 package game.gameplay.actors;
 
 import game.gameplay.Obstacle;
-import game.gameplay.Platform;
 import javafx.scene.image.Image;
 
 import static game.Main.RESOURCES;
