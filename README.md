@@ -1,6 +1,6 @@
 # COMP2042 Software Maintenance Frogger Game
 
-### ![Title](src/main/resources/frogger.png)
+### ![Title](src/main/resources/title.png)
 
 ### Added
 1. Main Menu
