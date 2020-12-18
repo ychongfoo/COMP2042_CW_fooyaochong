@@ -8,4 +8,5 @@
 /build/scripts/
 /build/test-result/
 /build/tmp/
+/src/main/resources/highscores/
 /.gradle/
